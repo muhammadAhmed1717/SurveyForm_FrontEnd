@@ -22,9 +22,6 @@ export default function page() {
     }
 
     useEffect(()=>{
-        if(!email){
-            router.push('/');
-        }
         findByEmail();
     },[])
     const goBack = () => {
@@ -34,41 +31,39 @@ export default function page() {
         router.push(`/?email=${encodeURIComponent(email)}`);
     }
     return (
-        <BackgroundSection>
-            <div className='sm:mt-0 mt-64'>
-                <div className='text-white'>
-                    <h1 className='font-extrabold text-6xl sm:text-7xl'>Thank you</h1>
-                    <p className='text-lg text-right -mt-9'>for your feedback</p>
+        <div className='sm:mt-0 mt-64'>
+            <div className='text-white'>
+                <h1 className='font-extrabold text-6xl sm:text-7xl'>Thank you</h1>
+                <p className='text-lg text-right -mt-9'>for your feedback</p>
+            </div>
+            <div className="flex justify-between my-5">
+                <div>
+                    <button className="bg-[#EDB6D2] flex justify-between align-middle p-3 rounded-3xl" onClick={()=>{console.log('Back Button Triggered');
+                        goBack();}}>
+                        <div className="flex">
+                            <div className="p-2">
+                                <img src="/assets/BackIcon.svg" alt="Logo" width={10} height={10} />
+                            </div>
+                            <div className="p-1">
+                                <p>Back</p>
+                            </div>
+                        </div>
+                    </button>
                 </div>
-                <div className="flex justify-between my-5">
-                    <div>
-                        <button className="bg-[#EDB6D2] flex justify-between align-middle p-3 rounded-3xl" onClick={()=>{console.log('Back Button Triggered');
-                            goBack();}}>
-                            <div className="flex">
-                                <div className="p-2">
-                                    <img src="/assets/BackIcon.svg" alt="Logo" width={10} height={10} />
-                                </div>
-                                <div className="p-1">
-                                    <p>Back</p>
-                                </div>
+                <div>
+                    <button className="bg-white flex justify-between align-middle p-3    rounded-3xl" onClick={()=>{console.log('Button Triggered');
+                    goHome();}}>
+                        <div className="flex justify-around">
+                            <div className="p-1">
+                                <p>Back to Home</p>
                             </div>
-                        </button>
-                    </div>
-                    <div>
-                        <button className="bg-white flex justify-between align-middle p-3    rounded-3xl" onClick={()=>{console.log('Button Triggered');
-                        goHome();}}>
-                            <div className="flex justify-around">
-                                <div className="p-1">
-                                    <p>Back to Home</p>
-                                </div>
-                                <div className="p-2">
-                                    <img src="/assets/NextIcon.svg" alt="Logo" width={10} height={10} />
-                                </div>
+                            <div className="p-2">
+                                <img src="/assets/NextIcon.svg" alt="Logo" width={10} height={10} />
                             </div>
-                        </button>
-                    </div>
+                        </div>
+                    </button>
                 </div>
             </div>
-        </BackgroundSection>
+        </div>
     )
 }

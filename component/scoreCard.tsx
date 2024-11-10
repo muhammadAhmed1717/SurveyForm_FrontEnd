@@ -20,7 +20,7 @@ export default function ScoreCard({ onScoreChange, showMessage }) {
       {array.map((items, itemIndex) => (
         <div key={itemIndex}>
             <div
-                className="bg-white rounded-full flex justify-between p-5 m-7 mx-auto w-[80%] sm:w-1/2 overflow-hidden"
+                className="bg-white rounded-full flex justify-between p-5 m-7 sm:mx-auto w-[85%] sm:w-1/2 overflow-hidden"
                 >
                 <div className="w-[30%] text-xl">{items}</div>
                 <div className="w-[60%] flex">

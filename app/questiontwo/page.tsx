@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import ScoreCard from "../../component/scoreCard";
-import { findUser, updateUserProgress } from "@/lib/data/user";
+import axios from "axios";
+import { findUser, updateUserProgress, deleteUserProgress } from "@/lib/data/user";
 
 export default function Question2() {
     const router = useRouter();
@@ -30,9 +31,6 @@ export default function Question2() {
         }
         findByEmail();
     },[])
-    const addData = () => {
-      console.log('Email: ', email);
-    }
     const goBack = () => {
         router.push(`/questionone?email=${encodeURIComponent(email)}`);
     }
@@ -40,7 +38,7 @@ export default function Question2() {
         console.log('Score: ', score)
         setSelection(score);
     };
-    const updateData = () => {
+    const updateData = async () => {
         if (selection.includes(-1)) {
             console.log('in if')
             const showMessage = selection.map((scoreItem) => scoreItem === -1);
@@ -61,7 +59,24 @@ export default function Question2() {
                 };
                 const update = {progress:obj};
                 updateUserProgress(email, update);
-                router.push(`/?email=${encodeURIComponent(email)}`)
+                console.log('---------')
+                findByEmail()
+                console.log('---------')
+                const userToSave = {
+                    email: email,
+                    step1: obj.step1,
+                    step2: step2obj,
+                }
+                const response = await axios.post(
+                    'http://localhost:5000/api/data',
+                    userToSave
+                )
+                console.log('Response: ', response);
+                if(response.data == 'User Saved Successfully')
+                {
+                    deleteUserProgress(email);
+                    router.push('/endingPage');
+                }
             } catch (error) {
                 console.log("Error in updating User: ", error);
             }
@@ -71,7 +86,7 @@ export default function Question2() {
 
     return (
         <div className="sm:bg-gradient-to-r from-zinc-900 to-black bg-gradient-to-b w-full min-h-screen sm:p-5 text-center">
-            <h3 className="text-white m-5">Question 2</h3>
+            <h3 className="text-white p-5">Question 2</h3>
             <h1 className="text-white text-center text-xl m-5">How important are these aspects for you?</h1>
             <div className="w-full">
                 <ScoreCard onScoreChange={handleScoreChange} showMessage={showMessage}/>

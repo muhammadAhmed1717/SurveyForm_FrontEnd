@@ -57,7 +57,7 @@ export default function Question1() {
 
     return (
         <div className="sm:bg-gradient-to-r from-zinc-900 to-black bg-gradient-to-b w-full min-h-screen sm:p-9 text-center">
-            <h3 className="text-white m-9">Question 1</h3>
+            <h3 className="text-white p-9">Question 1</h3>
             <h1 className="text-white text-center text-xl m-5">What is your preferred choice?</h1>
             <div className="flex sm:m-0 m-9">
                 <div className="w-1/2 bg-[#6D6D6D] m-1 rounded-lg relative">

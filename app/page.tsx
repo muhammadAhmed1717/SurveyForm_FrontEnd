@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import BackgroundSection from "../component/background";
 import { addUserProgress, findUser } from "@/lib/data/user";
+import "./globals.css";
+
 
 export default function Index() {
   const [email, setEmail] = useState('');
@@ -14,12 +16,14 @@ export default function Index() {
     setEmail(e.target.value);
     console.log("Email: ", e.target.value);
   };
-  const addData = () => {
+  const addData = async () => {
     try{
-      const user = findUser(email);
-      if(user){
+      const user = await findUser(email);
+      if(user.length != 0){
+        console.log('User Found', user)
         router.push(`/questionone?email=${encodeURIComponent(email)}`)
       }else{
+        console.log('User Not Found')
         addUserProgress(email);
         router.push(`/questionone?email=${encodeURIComponent(email)}`)
       }
@@ -29,7 +33,7 @@ export default function Index() {
   }
 
   return (
-    <BackgroundSection>
+    <div>
       <div className="text-left">
         <h1 className="text-white text-center text-5xl">Questionnaire</h1>
         <div className="bg-[#EDB6D2] rounded-2xl p-3">
@@ -58,6 +62,6 @@ export default function Index() {
             </div>
         </button>
       </div>
-    </BackgroundSection>
+    </div>
   );
 }
