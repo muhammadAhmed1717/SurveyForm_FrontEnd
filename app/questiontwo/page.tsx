@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import ScoreCard from "../../component/scoreCard";
-import axios from "axios";
 import { findUser, updateUserProgress, deleteUserProgress } from "@/lib/data/user";
 
 export default function Question2() {
@@ -48,35 +47,9 @@ export default function Question2() {
             console.log('in else')
             try {
                 console.log('In Update: ', selection);
-                const step2obj = {
-                    "comfort": selection[0],
-                    "looks": selection[1],
-                    "price": selection[2],
-                }
-                const obj = {
-                    step1: user[0].progress.step1,
-                    step2:  step2obj
-                };
                 const update = {progress:obj};
                 updateUserProgress(email, update);
-                console.log('---------')
-                findByEmail()
-                console.log('---------')
-                const userToSave = {
-                    email: email,
-                    step1: obj.step1,
-                    step2: step2obj,
-                }
-                const response = await axios.post(
-                    'http://localhost:5000/api/data',
-                    userToSave
-                )
-                console.log('Response: ', response);
-                if(response.data == 'User Saved Successfully')
-                {
-                    deleteUserProgress(email);
-                    router.push('/endingPage');
-                }
+                router.push(`/endingPage?email=${encodeURIComponent(email)}`);
             } catch (error) {
                 console.log("Error in updating User: ", error);
                 alert('Error in Updating User');

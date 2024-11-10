@@ -2,7 +2,8 @@
 import React , {useEffect, useState} from 'react'
 import { useRouter } from 'next/navigation'
 import BackgroundSection from '../../component/background'
-import { findUser } from '../../lib/data/user'
+import { findUser, deleteUserProgress } from '../../lib/data/user'
+import axios from "axios";
 import { useSearchParams } from 'next/navigation'
 export default function page() {
     const router = useRouter();
@@ -27,8 +28,36 @@ export default function page() {
     const goBack = () => {
         router.push(`/questionone?email=${encodeURIComponent(email)}`);
     }
-    const goHome = () => {
-        router.push(`/?email=${encodeURIComponent(email)}`);
+    const goHome = async () => {
+        const step2obj = {
+            "comfort": user[0].progress.step2.comfort,
+            "looks": user[0].progress.step2.looks,
+            "price": user[0].progress.step2.price,
+        }
+        const obj = {
+            step1: user[0].progress.step1,
+            step2:  step2obj
+        };
+        const userToSave = {
+            email: email,
+            step1: obj.step1,
+            step2: step2obj,
+        }
+        try{
+            const response = await axios.post(
+                'http://localhost:5000/api/data',
+                userToSave
+            )
+            console.log('Response: ', response);
+            if(response.data == 'User Saved Successfully')
+            {
+                deleteUserProgress(email);
+                router.push('/');
+            }
+        }catch(error){
+            console.log('Error in Deleting');
+            alert('Error in Uploading data to Database')
+        }
     }
     return (
         <div className='sm:mt-0 mt-64'>
