@@ -54,6 +54,10 @@ export default function page() {
                 deleteUserProgress(email);
                 router.push('/');
             }
+            if(response.data == "User Already Exists"){
+                router.push('/');
+                alert("User Already Exists");
+            }
         }catch(error){
             console.log('Error in Deleting');
             alert('Error in Uploading data to Database')

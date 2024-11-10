@@ -3,12 +3,8 @@ import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Import usePathname hook
+import { usePathname } from "next/navigation"; 
 import "./globals.css";
-
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
 
 export default function RootLayout({
   children,
