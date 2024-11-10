@@ -46,6 +46,7 @@ export default function Question1() {
                 router.push(`/questiontwo?email=${encodeURIComponent(email)}`)
             } catch (error) {
                 console.log("Error in updating User: ", error);
+                alert('Error in Updating User');
             }
         }
         else {

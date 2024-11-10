@@ -79,6 +79,7 @@ export default function Question2() {
                 }
             } catch (error) {
                 console.log("Error in updating User: ", error);
+                alert('Error in Updating User');
             }
         }
     }
