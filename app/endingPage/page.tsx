@@ -26,7 +26,7 @@ export default function page() {
         findByEmail();
     },[])
     const goBack = () => {
-        router.push(`/questionone?email=${encodeURIComponent(email)}`);
+        router.push(`/questiontwo?email=${encodeURIComponent(email)}`);
     }
     const goHome = async () => {
         const step2obj = {
@@ -60,9 +60,9 @@ export default function page() {
         }
     }
     return (
-        <div className='sm:mt-0 mt-64'>
+        <div className='sm:mt-0 mt-96'>
             <div className='text-white'>
-                <h1 className='font-extrabold text-6xl sm:text-7xl'>Thank you</h1>
+                <h1 className='text-right font-extrabold text-6xl sm:text-7xl'>Thank you</h1>
                 <p className='text-lg text-right -mt-9'>for your feedback</p>
             </div>
             <div className="flex justify-between my-5">

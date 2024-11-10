@@ -46,6 +46,15 @@ export default function Question2() {
         } else {
             console.log('in else')
             try {
+                const step2obj = {
+                    "comfort": selection[0],
+                    "looks": selection[1],
+                    "price": selection[2],
+                }
+                const obj = {
+                    step1: user[0].progress.step1,
+                    step2:  step2obj
+                };
                 console.log('In Update: ', selection);
                 const update = {progress:obj};
                 updateUserProgress(email, update);
